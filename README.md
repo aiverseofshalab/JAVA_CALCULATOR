@@ -19,7 +19,20 @@ The calculator has distinct Normal and Scientific modes. Scientific mode adds fu
 
 ## Screenshots
 
-Add real screenshots captured from the running application to `docs/screenshots/`. Suggested views: Normal Calculator, Scientific Calculator, Engineering workspace, Unit Converter, and Help Guide.
+# Screenshots
+
+Calculator tab
+![alt text](<Screenshot 2026-10-02 at 00.45.34.png>)
+
+Engineering tools
+
+![alt text](<Screenshot 2026-10-02 at 00.45.51.png>)
+
+
+Unit converter
+![alt text](<Screenshot 2026-10-02 at 00.46.03.png>)
+
+
 
 ## Architecture
 
