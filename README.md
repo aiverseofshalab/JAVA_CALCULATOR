@@ -1,44 +1,171 @@
-# Engineering Calculator
+<div align="center">
 
-A Java 21 desktop scientific and engineering calculator for students, developers, and engineers. The application combines a safe expression parser with an engineering formula workspace, unit conversion, searchable reference material, and recent calculation history.
+# 🧮 Engineering Calculator
 
-## Overview
+### A fast, safe and good-looking desktop calculator built for students, developers & engineers
 
-The calculator has distinct Normal and Scientific modes. Scientific mode adds function keys above the same numeric keypad. The application also provides categorized engineering cards with labeled inputs and units, a converter for six common unit categories, a searchable formula guide, and a collapsible history drawer.
+<br>
 
-## Features
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Swing](https://img.shields.io/badge/UI-Swing-3F6FBA?style=for-the-badge&logo=java&logoColor=white)
+![Maven](https://img.shields.io/badge/Build-Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+![JUnit](https://img.shields.io/badge/Tests-JUnit%205-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-Apple%20Silicon-000000?style=for-the-badge&logo=apple&logoColor=white)
 
-- Expression evaluation with precedence, parentheses, power, modulo, postfix percent and factorial, constants `pi` and `e`, and previous answer `ans`.
-- Scientific functions: trigonometry and inverse trigonometry, logarithms, roots, absolute value, exponential, rounding functions, and factorial.
-- Visible DEG/RAD selection that controls trig and inverse trig.
-- Electrical, mechanics, physics, error analysis, and quadratic formula cards with validation and reset actions.
-- Length, mass, temperature, time, area, and speed conversions.
-- Searchable help topics with syntax, formula, example, description, units, and shortcut information.
-- Clickable recent calculator expressions; engineering and conversion results remain available as references.
-- Keyboard input, Enter to calculate, Escape to clear, and Backspace to delete.
+<br>
 
-## Screenshots
+[✨ Features](#-features) •
+[📸 Screenshots](#-screenshots) •
+[⬇️ Download](#️-download) •
+[🛠️ Build](#️-build-from-source) •
+[🏗️ Architecture](#️-architecture) •
+[🗺️ Roadmap](#️-roadmap)
 
-# Screenshots
+</div>
 
-Calculator tab
-![alt text](<Screenshot 2026-10-02 at 00.45.34.png>)
+---
 
-Engineering tools
+## 🌟 Overview
 
-![alt text](<Screenshot 2026-10-02 at 00.45.51.png>)
+**Engineering Calculator** combines a **safe recursive-descent expression parser** with an **engineering formula workspace**, a **unit converter**, a **searchable help guide** and a **clickable history drawer** – all in one clean dark-themed Swing app.
 
+> 🔒 No scripting engine. No `eval`. No arbitrary code execution – every expression is parsed and evaluated by our own parser.
 
-Unit converter
-![alt text](<Screenshot 2026-10-02 at 00.46.03.png>)
+---
 
+## 📸 Screenshots
 
+<div align="center">
 
-## Architecture
+### 🔢 Calculator
+<img src="docs/screenshots/calculator.png" alt="Calculator screen" width="90%">
 
-The business layer remains independent of Swing. `core` contains the recursive-descent parser and calculator facade. `engineering` and `conversion` contain reusable calculation services. `history` provides a small in-memory history API. `gui` contains the application shell and screen panels; `gui.components` contains reusable formula cards. `util` provides result formatting.
+<br><br>
 
-## Project structure
+### ⚙️ Engineering Workspace
+<img src="docs/screenshots/engineering.png" alt="Engineering formulas screen" width="90%">
+
+<br><br>
+
+### 🔄 Unit Converter
+<img src="docs/screenshots/unit-converter.png" alt="Unit converter screen" width="90%">
+
+</div>
+
+---
+
+## ✨ Features
+
+| | Feature | Details |
+| :-: | --- | --- |
+| 🧠 | **Smart expression engine** | Precedence, parentheses, power, modulo, postfix `%` and `!`, constants `pi` & `e`, previous answer `ans` |
+| 🔬 | **Scientific functions** | `sin` `cos` `tan` `asin` `acos` `atan` `log` `ln` `sqrt` `abs` `exp`, rounding functions, factorial |
+| 📐 | **DEG / RAD switch** | Always-visible angle mode controlling trig and inverse trig |
+| ⚡ | **Engineering cards** | Electrical, mechanics, physics, error analysis & quadratic solver – with labeled inputs, validation and reset |
+| 🔄 | **Unit converter** | Length, mass, temperature, time, area and speed |
+| 📚 | **Help guide** | Searchable topics with syntax, formula, example, units and shortcuts |
+| 🕘 | **History drawer** | Click any recent expression to reuse it |
+| ⌨️ | **Keyboard friendly** | `Enter` to calculate, `Esc` to clear, `Backspace` to delete |
+
+---
+
+## 🧪 Calculator examples
+
+| Expression | Mode | Result |
+| --- | :-: | :-: |
+| `2 + 3 * 4` | – | **14** |
+| `(10 + 5) * 2` | – | **30** |
+| `50%` | – | **0.5** |
+| `5%2` | – | **1** |
+| `sin(90)` | 🟦 DEG | **1** |
+| `sin(pi/2)` | 🟧 RAD | **1** |
+| `sqrt(144)` | – | **12** |
+
+---
+
+## ⚡ Engineering formulas
+
+Ohm's law • Electrical power • Series & parallel resistance • Voltage division • Force • Kinetic & potential energy • Density • Momentum • Work • Mechanical power • Error calculations • Real/complex quadratic solver
+
+📄 Full list with syntax and examples: **[docs/formulas.md](docs/formulas.md)**
+
+---
+
+## ⌨️ Keyboard shortcuts
+
+| Key | Action |
+| :-: | --- |
+| `0`–`9`, `.`, operators, parentheses | Enter expression |
+| `Enter` | ✅ Calculate |
+| `Escape` | 🧹 Clear expression and result |
+| `Backspace` | ⌫ Delete selection or previous character |
+
+---
+
+## ⬇️ Download
+
+<div align="center">
+
+**🍎 macOS (Apple Silicon)** → `EngineeringCalculator-1.0.0.dmg`
+
+*Generated in `dist/` by the packaging script below.*
+
+</div>
+
+The native app bundle ships with its **own Java runtime** – users don't need to install Java separately.
+
+---
+
+## 🛠️ Build from source
+
+> Java 25 JDK is used for macOS packaging. The official **Maven Wrapper** downloads the pinned Maven on first run – no separate Maven install needed.
+
+```bash
+./mvnw clean test
+./mvnw package
+```
+
+Run the packaged JAR *(a graphical desktop session is required)*:
+
+```bash
+java -jar target/engineering-calculator-1.0.0.jar
+```
+
+### 📦 Build the macOS installer
+
+On an Apple Silicon Mac with Java 25 and `jpackage` available:
+
+```bash
+./scripts/package-macos.sh
+```
+
+The script will:
+
+1. ✅ Run tests and package the project
+2. 📁 Create `dist/Engineering Calculator.app` with a bundled runtime
+3. 💿 Create and verify `dist/EngineeringCalculator-1.0.0.dmg`
+4. 🎨 Use `src/main/resources/icons/EngineeringCalculator.icns` if you add that icon
+
+> ℹ️ Native packages must be created on their target platform.
+
+---
+
+## 🏗️ Architecture
+
+The business layer is **fully independent of Swing**, so it is easy to test and reuse.
+
+```mermaid
+flowchart LR
+    GUI["🖥️ gui<br/>shell & panels"] --> CORE["🧠 core<br/>parser + calculator"]
+    GUI --> ENG["⚡ engineering<br/>formula services"]
+    GUI --> CONV["🔄 conversion<br/>unit registry"]
+    GUI --> HIST["🕘 history<br/>in-memory API"]
+    GUI --> UTIL["🔧 util<br/>formatting"]
+    GUI --- COMP["🧩 gui.components<br/>formula cards"]
+```
+
+<details>
+<summary><b>📂 Project structure</b></summary>
 
 ```text
 src/main/java/com/shalab/calculator/
@@ -52,79 +179,63 @@ src/main/java/com/shalab/calculator/
 src/test/java/   JUnit 5 tests for core, engineering and conversion
 ```
 
-## Tech stack
+</details>
 
-Java 21, Swing, Maven, JUnit 5. No third-party UI framework is required.
+---
 
-## Download
+## 🧰 Tech stack
 
-**macOS Apple Silicon:** `EngineeringCalculator-1.0.0.dmg` (generated in `dist/` by the packaging script below).
+| Layer | Technology |
+| --- | --- |
+| Language | ☕ Java 21 |
+| UI | 🎨 Swing (no third-party UI framework) |
+| Build | 📦 Maven (with Wrapper) |
+| Testing | 🧪 JUnit 5 |
 
-The native macOS application bundle includes its own Java runtime, so end users do not need to install Java separately. The DMG is built for Apple Silicon on macOS.
+---
 
-## Build from source
-
-A Java 25 JDK is used for macOS packaging. The project includes the official Maven Wrapper, which downloads the pinned Maven distribution on its first run; a separate Maven installation is not required.
+## 🧪 Testing
 
 ```bash
 ./mvnw clean test
-./mvnw package
 ```
 
-Run the packaged application JAR:
+The JUnit 5 suite covers expression arithmetic & precedence, scientific functions & invalid domains, engineering formulas & validation, quadratic roots and unit conversions.
 
-```bash
-java -jar target/engineering-calculator-1.0.0.jar
-```
+---
 
-A graphical desktop session is required.
+## 🛡️ Error handling
 
-## Build macOS installer
+- ❌ Invalid expressions and math-domain errors appear right in the calculator result area.
+- 📝 Engineering forms report field and domain issues next to the relevant form.
+- 🔒 Nothing is evaluated through a scripting engine or arbitrary code execution.
 
-On an Apple Silicon Mac with Java 25 and `jpackage` available, run:
+---
 
-```bash
-./scripts/package-macos.sh
-```
+## 🗺️ Roadmap
 
-The script tests and packages the project, creates `dist/Engineering Calculator.app` with a bundled runtime, creates and verifies `dist/EngineeringCalculator-1.0.0.dmg`, and uses `src/main/resources/icons/EngineeringCalculator.icns` if that icon is added. Native packages must be created on their target platform.
-## Testing
+- [ ] 📈 Graph plotting
+- [ ] 🧮 Matrix calculations
+- [ ] ➗ Extended complex arithmetic
+- [ ] 💾 Persistent history
+- [ ] 📤 Calculation export
+- [ ] 🏭 More engineering domains
+- [ ] 🎨 Configurable themes
 
-`mvn clean test` runs the JUnit 5 unit suite covering expression arithmetic and precedence, scientific functions and invalid domains, engineering formulas and validation, quadratic roots, and unit conversions.
+---
 
-## Calculator examples
+## 👨‍💻 Author
 
-- `2 + 3 * 4` → `14`
-- `(10 + 5) * 2` → `30`
-- `50%` → `0.5`
-- `5%2` → `1`
-- DEG `sin(90)` → `1`
-- RAD `sin(pi/2)` → `1`
-- `sqrt(144)` → `12`
+<div align="center">
 
-## Engineering formulas
+**Shalab Kumar Shrivastava**
+B.Tech CSE · IoT, Cybersecurity & Blockchain Technology
 
-The workspace includes Ohm's law, electrical power, series and parallel resistance, voltage division, force, kinetic and potential energy, density, momentum, work, mechanical power, error calculations, and a real/complex quadratic solver. See [docs/formulas.md](docs/formulas.md).
+[![GitHub](https://img.shields.io/badge/GitHub-aiverseofshalab-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aiverseofshalab)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-aiverseofshalab-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/aiverseofshalab)
 
-## Keyboard shortcuts
+<br>
 
-| Key | Action |
-| --- | --- |
-| `0`–`9`, decimal, operators, parentheses | Enter expression |
-| `Enter` | Calculate |
-| `Escape` | Clear expression and result |
-| `Backspace` | Delete selection or previous character |
+⭐ **If you like this project, give it a star!** ⭐
 
-## Error handling
-
-Invalid expressions and mathematical domains are shown in the calculator result area. Engineering forms report field and domain issues next to the corresponding form. No expression is evaluated using a scripting engine or arbitrary code execution.
-
-## Future improvements
-
-Graph plotting, matrix calculations, extended complex arithmetic, persistent history, calculation export, additional engineering domains, and configurable themes.
-
-## Author
-
-Shalab Kumar Shrivastava  
-B.Tech CSE / IoT, Cybersecurity & Blockchain Technology  
-[GitHub](https://github.com/aiverseofshalab) · [LinkedIn](https://linkedin.com/in/aiverseofshalab)
+</div>
