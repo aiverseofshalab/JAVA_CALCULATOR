@@ -81,20 +81,6 @@ Ohm's law • Electrical power • Series & parallel resistance • Voltage divi
 
 ---
 
-## ⬇️ Download
-
-<div align="center">
-
-**🍎 macOS (Apple Silicon)** → `EngineeringCalculator-1.0.0.dmg`
-
-*Generated in `dist/` by the packaging script below.*
-
-</div>
-
-The native app bundle ships with its **own Java runtime** – users don't need to install Java separately.
-
----
-
 ## 🛠️ Build from source
 
 > Java 25 JDK is used for macOS packaging. The official **Maven Wrapper** downloads the pinned Maven on first run – no separate Maven install needed.
