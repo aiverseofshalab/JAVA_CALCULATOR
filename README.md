@@ -33,27 +33,6 @@
 
 ---
 
-## 📸 Screenshots
-
-<div align="center">
-
-### 🔢 Calculator
-<img src="docs/screenshots/calculator.png" alt="Calculator screen" width="90%">
-
-<br><br>
-
-### ⚙️ Engineering Workspace
-<img src="docs/screenshots/engineering.png" alt="Engineering formulas screen" width="90%">
-
-<br><br>
-
-### 🔄 Unit Converter
-<img src="docs/screenshots/unit-converter.png" alt="Unit converter screen" width="90%">
-
-</div>
-
----
-
 ## ✨ Features
 
 | | Feature | Details |
