@@ -1,0 +1,16 @@
+package com.shalab.calculator.engineering;
+
+/** Validated engineering formula services, independent of Swing. */
+public final class EngineeringCalculator {
+    public record Roots(double discriminant, String first, String second, String steps) {}
+    private static double positive(double x,String name){if(!Double.isFinite(x)||x<=0)throw new IllegalArgumentException(name+" must be greater than zero.");return x;}
+    private static double finite(double value){if(!Double.isFinite(value))throw new IllegalArgumentException("Calculation exceeds the supported numeric range.");return value;}
+    public static double voltage(double i,double r){return finite(i*r);} public static double current(double v,double r){return finite(v/positive(r,"Resistance"));} public static double resistance(double v,double i){return finite(v/positive(i,"Current"));}
+    public static double powerVI(double v,double i){return finite(v*i);} public static double powerIR(double i,double r){return finite(i*i*r);} public static double powerVR(double v,double r){return finite(v*v/positive(r,"Resistance"));}
+    public static double series(double... r){if(r.length==0)throw new IllegalArgumentException("Enter at least one resistance.");double s=0;for(double x:r)s+=positive(x,"Resistance");return finite(s);}
+    public static double parallel(double... r){if(r.length==0)throw new IllegalArgumentException("Enter at least one resistance.");double reciprocal=0;for(double x:r)reciprocal+=1/positive(x,"Resistance");return finite(1/reciprocal);}
+    public static double voltageDivider(double vin,double r1,double r2){return finite(vin*positive(r2,"R2")/(positive(r1,"R1")+r2));}
+    public static double force(double m,double a){return finite(m*a);} public static double kineticEnergy(double m,double v){return finite(.5*m*v*v);} public static double potentialEnergy(double m,double g,double h){return finite(m*g*h);} public static double density(double m,double volume){return finite(m/positive(volume,"Volume"));} public static double momentum(double m,double v){return finite(m*v);} public static double work(double f,double d){return finite(f*d);} public static double power(double w,double t){return finite(w/positive(t,"Time"));}
+    public static double absoluteError(double measured,double truth){return finite(Math.abs(measured-truth));} public static double relativeError(double measured,double truth){return finite(absoluteError(measured,truth)/positive(Math.abs(truth),"True value"));} public static double percentageError(double measured,double truth){return relativeError(measured,truth)*100;}
+    public static Roots solveQuadratic(double a,double b,double c){if(!Double.isFinite(a)||!Double.isFinite(b)||!Double.isFinite(c))throw new IllegalArgumentException("Coefficients must be finite numbers.");if(a==0)throw new IllegalArgumentException("Coefficient a must not be zero.");double d=finite(b*b-4*a*c);if(d>=0){double sqrt=Math.sqrt(d),x1=(-b+sqrt)/(2*a),x2=(-b-sqrt)/(2*a);finite(x1);finite(x2);return new Roots(d,Double.toString(x1),Double.toString(x2),"D = b² − 4ac = "+d+"\nx = (−b ± √D) / 2a");}double real=-b/(2*a),imag=Math.sqrt(-d)/Math.abs(2*a);finite(real);finite(imag);return new Roots(d,real+" + "+imag+"i",real+" − "+imag+"i","D = "+d+" < 0, so the roots are complex.\nx = −b/(2a) ± √(−D)/(2|a|) i");}
+}

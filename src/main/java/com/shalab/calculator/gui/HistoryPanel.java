@@ -1,0 +1,12 @@
+package com.shalab.calculator.gui;
+
+import com.shalab.calculator.history.CalculationHistory;
+import javax.swing.*;import javax.swing.border.EmptyBorder;import java.awt.*;import java.util.function.Consumer;
+
+/** Compact history drawer with a useful empty state and clickable entries. */
+public final class HistoryPanel extends JPanel {
+    private final CalculationHistory history;private final Consumer<String> reuse;private final JPanel items=UITheme.panel(new GridLayout(0,1,7,7));
+    public HistoryPanel(CalculationHistory history,Consumer<String> reuse){super(new BorderLayout(8,8));this.history=history;this.reuse=reuse;setBackground(UITheme.BACKGROUND);setBorder(new EmptyBorder(14,12,14,14));setPreferredSize(new Dimension(270,100));JPanel head=UITheme.panel(new BorderLayout());JLabel title=UITheme.label("History");title.setFont(UITheme.SECTION);JButton clear=UITheme.button("Clear",UITheme.DANGER);clear.addActionListener(e->{history.clear();refresh();});head.add(title,BorderLayout.WEST);head.add(clear,BorderLayout.EAST);items.setOpaque(false);JScrollPane scroll=new JScrollPane(items);scroll.setBorder(null);scroll.getViewport().setBackground(UITheme.BACKGROUND);scroll.getVerticalScrollBar().setUnitIncrement(16);add(head,BorderLayout.NORTH);add(scroll,BorderLayout.CENTER);refresh();}
+    public void refresh(){items.removeAll();if(history.entries().isEmpty()){JPanel empty=UITheme.card(new GridBagLayout());JLabel text=UITheme.muted("No calculations yet.\nYour recent calculations will appear here.");text.setHorizontalAlignment(SwingConstants.CENTER);empty.add(text);items.add(empty);}else for(var entry:history.entries()){JButton item=UITheme.button("<html><div style='text-align:left;width:190px'><span style='color:#97a6b9'>"+escape(entry.expression())+"</span><br><b>= "+escape(entry.result())+"</b></div></html>",UITheme.CARD);item.setHorizontalAlignment(SwingConstants.LEFT);item.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(UITheme.BORDER,1,true),new EmptyBorder(10,12,10,12)));boolean reusable=!entry.expression().startsWith("Convert: ")&&!entry.expression().contains(" · ");item.setEnabled(reusable);item.setToolTipText(reusable?"Click to reuse this expression":"Result is available for reference");item.addActionListener(e->reuse.accept(entry.expression()));items.add(item);}items.revalidate();items.repaint();}
+    private String escape(String s){return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;");}
+}

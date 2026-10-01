@@ -1,0 +1,8 @@
+package com.shalab.calculator.core;
+import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;
+class CalculatorEngineTest {private final CalculatorEngine engine=new CalculatorEngine();private double eval(String s){return engine.evaluate(s,AngleMode.DEG,0);}
+ @Test void arithmeticAndPrecedence(){assertEquals(5,eval("2+3"));assertEquals(6,eval("10-4"));assertEquals(20,eval("5*4"));assertEquals(4,eval("20/5"));assertEquals(14,eval("2+3*4"));assertEquals(20,eval("(2+3)*4"));assertEquals(1024,eval("2^10"));assertEquals(.5,eval("50%"));assertEquals(1,eval("5%2"));}
+ @Test void scientificFunctionsAndConstants(){assertEquals(12,eval("sqrt(144)"));assertEquals(2,eval("log(100)"));assertEquals(1,eval("ln(e)"),1e-12);assertEquals(1,eval("sin(90)"),1e-12);assertEquals(1,eval("cos(0)"),1e-12);assertEquals(120,eval("5!"));assertEquals(1,engine.evaluate("sin(pi/2)",AngleMode.RAD,0),1e-12);assertEquals(42,engine.evaluate("ans*2",AngleMode.DEG,21));}
+ @Test void invalidInputsAreFriendly(){assertTrue(assertThrows(ExpressionException.class,()->eval("1/0")).getMessage().contains("zero"));assertThrows(ExpressionException.class,()->eval("sqrt(-1)"));assertThrows(ExpressionException.class,()->eval("2+"));assertThrows(ExpressionException.class,()->eval("(-1)!"));}
+ @Test void constantsNegativeValuesAndTrigModes(){assertEquals(-3,eval("-5+2"));assertEquals(Math.PI*2,eval("pi*2"),1e-12);assertEquals(Math.E*2,eval("e*2"),1e-12);assertEquals(0.5,eval("sin(30)"),1e-12);assertEquals(1,eval("cos(0)"),1e-12);assertEquals(1,eval("tan(45)"),1e-12);assertEquals(1,engine.evaluate("sin(pi/2)",AngleMode.RAD,0),1e-12);assertEquals(15,engine.evaluate("ANS+5",AngleMode.DEG,10));}
+}

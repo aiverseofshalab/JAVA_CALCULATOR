@@ -1,0 +1,3 @@
+package com.shalab.calculator.engineering;
+/** Named electrical formula entry points. */
+public final class ElectricalCalculator { private ElectricalCalculator(){} public static double voltage(double current,double resistance){return EngineeringCalculator.voltage(current,resistance);} public static double power(double voltage,double current){return EngineeringCalculator.powerVI(voltage,current);} public static double seriesResistance(double... values){return EngineeringCalculator.series(values);}public static double parallelResistance(double... values){return EngineeringCalculator.parallel(values);} }
